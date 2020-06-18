@@ -1,6 +1,6 @@
-﻿using Cz.Bkk.Generic.IdentityManagement.IntegrationLayer.Services;
-using Cz.Bkk.Generic.IdentityManagement.Interfaces;
+﻿using Cz.Bkk.Generic.IdentityManagement.Interfaces;
 using Cz.Bkk.Generic.IdentityManagement.Models;
+using Cz.Bkk.Generic.IdentityManagement.ServiceLayer;
 using System;
 using System.Collections.Generic;
 using System.Text;

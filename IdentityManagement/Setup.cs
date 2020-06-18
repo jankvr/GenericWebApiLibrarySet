@@ -1,6 +1,6 @@
-﻿using Cz.Bkk.Generic.IdentityManagement.IntegrationLayer;
-using Cz.Bkk.Generic.IdentityManagement.Interfaces;
+﻿using Cz.Bkk.Generic.IdentityManagement.Interfaces;
 using Cz.Bkk.Generic.IdentityManagement.LogicLayer;
+using Cz.Bkk.Generic.IdentityManagement.ServiceLayer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cz.Bkk.Generic.IdentityManagement.IntegrationLayer.Services
+namespace Cz.Bkk.Generic.IdentityManagement.ServiceLayer
 {
     /// <summary>
     /// User registration class. Calls .NET Core Identity manager for signing in
