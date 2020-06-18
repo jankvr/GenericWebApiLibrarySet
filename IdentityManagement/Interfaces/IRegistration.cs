@@ -8,6 +8,6 @@ namespace Cz.Bkk.Generic.IdentityManagement.Interfaces
     /// </summary>
     public interface IRegistration
     {
-        Task<bool> CreateAsync(RegistrationInput input);
+        Task<bool> CreateAsync(string username, string firstname, string lastname, string email);
     }
 }

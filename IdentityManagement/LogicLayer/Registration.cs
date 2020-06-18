@@ -1,4 +1,4 @@
-﻿using Cz.Bkk.Generic.IdentityManagement.IntegrationLayer;
+﻿using Cz.Bkk.Generic.IdentityManagement.IntegrationLayer.Services;
 using Cz.Bkk.Generic.IdentityManagement.Interfaces;
 using Cz.Bkk.Generic.IdentityManagement.Models;
 using System;
@@ -17,8 +17,16 @@ namespace Cz.Bkk.Generic.IdentityManagement.LogicLayer
             this.service = service;
         }
 
-        public async Task<bool> CreateAsync(RegistrationInput input)
+        public async Task<bool> CreateAsync(string username, string firstname, string lastname, string email)
         {
+            var input = new RegistrationInput 
+            { 
+                FirstName = firstname, 
+                LastName = lastname, 
+                Password = "asdf",
+                Email = email,
+                Username = username
+            };
             var result = await service.CreateAsync(input);
             return result.Succeeded;
         }
