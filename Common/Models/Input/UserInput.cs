@@ -1,14 +1,14 @@
-﻿namespace Cz.Bkk.Generic.IdentityManagement.Models
+﻿namespace Cz.Bkk.Generic.Common.Models.Input
 {
     /// <summary>
-    /// This model serves as an input parameter
+    /// This model serves as an user input parameter
     /// </summary>
-    public class RegistrationInput
+    public class UserInput
     {
         /// <summary>
         /// User name
         /// </summary>
-        public string Username { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// First name
         /// </summary>
@@ -25,5 +25,9 @@
         /// Password
         /// </summary>
         public string Password { get; set; }
+        /// <summary>
+        /// Role
+        /// </summary>
+        public UserRole Role { get; set; }
     }
 }

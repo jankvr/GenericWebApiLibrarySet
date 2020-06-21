@@ -1,4 +1,4 @@
-﻿namespace Cz.Bkk.Generic.Common.Model.Response
+﻿namespace Cz.Bkk.Generic.Common.Models.Response
 {
     /// <summary>
     /// Generic message used widely in WebApi project

@@ -1,4 +1,5 @@
 ﻿using Cz.Bkk.Generic.Common.Models.Input;
+using Cz.Bkk.Generic.Common.Models.Response;
 using System.Threading.Tasks;
 
 namespace Cz.Bkk.Generic.IdentityManagement.Interfaces
@@ -6,8 +7,9 @@ namespace Cz.Bkk.Generic.IdentityManagement.Interfaces
     /// <summary>
     /// Registration interface
     /// </summary>
-    public interface IRegistration
+    public interface IUser
     {
-        Task<string> CreateAsync(UserInput input);
+        Task<SignIn> Authenticate(SignInInput input);
     }
 }
+

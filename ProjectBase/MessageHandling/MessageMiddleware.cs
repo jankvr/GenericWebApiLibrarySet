@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Cz.Bkk.Generic.Common.Model.Response;
+using Cz.Bkk.Generic.Common.Models.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 

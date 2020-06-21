@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cz.Bkk.Generic.Common.Model.Response
+namespace Cz.Bkk.Generic.Common.Models.Response
 {
     /// <summary>
     /// Possible response states

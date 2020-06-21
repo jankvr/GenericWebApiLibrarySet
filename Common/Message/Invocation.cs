@@ -1,4 +1,4 @@
-﻿using Cz.Bkk.Generic.Common.Model.Response;
+﻿using Cz.Bkk.Generic.Common.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;

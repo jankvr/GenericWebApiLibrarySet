@@ -1,5 +1,5 @@
-﻿using Cz.Bkk.Generic.Common.Model.Response;
-using Cz.Bkk.Generic.IdentityManagement.Models;
+﻿using Cz.Bkk.Generic.Common.Models.Input;
+using Cz.Bkk.Generic.IdentityManagement.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -11,19 +11,20 @@ namespace Cz.Bkk.Generic.IdentityManagement.ServiceLayer
     /// <summary>
     /// User registration class. Calls .NET Core Identity manager for signing in
     /// </summary>
-    public class RegistrationService
+    internal class RegistrationService : IRegistrationService
     {
-        private UserManager<ApplicationUser> userManager;
+        private UserManager<IdentityUser> userManager;
 
-        public RegistrationService(UserManager<ApplicationUser> userManager)
+        public RegistrationService(UserManager<IdentityUser> userManager)
         {
             this.userManager = userManager;
         }
 
-        public async Task<IdentityResult> CreateAsync(RegistrationInput input)
+        public async Task<IdentityResult> CreateAsync(UserInput input)
         {
-            var newUser = new ApplicationUser { Id = Guid.NewGuid().ToString(), Email = input.Email, EmailConfirmed = true };
+            var newUser = new IdentityUser { Id = Guid.NewGuid().ToString(), UserName = input.UserName, Email = input.Email, EmailConfirmed = true };
             var result = await userManager.CreateAsync(newUser, input.Password);
+            var roleAssignment = await userManager.AddToRoleAsync(newUser, input.Role.ToString());
             return result;
         }
     }

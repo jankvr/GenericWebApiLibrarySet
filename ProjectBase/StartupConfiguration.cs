@@ -1,7 +1,9 @@
-﻿using Cz.Bkk.Generic.IdentityManagement;
+﻿using Cz.Bkk.Generic.Common.IdentityInterfaces;
+using Cz.Bkk.Generic.Common.Services;
 using Cz.Bkk.Generic.ProjectBase.AppConfiguration;
 using Cz.Bkk.Generic.ProjectBase.MessageHandling;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
@@ -19,15 +21,22 @@ namespace ProjectBase
         /// Application configuration
         /// </summary>
         /// <param name="app"></param>
-        public static void ConfigureApp(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
+        public static void ConfigureApp(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env, IConfiguration configuration)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseMiddleware<MessageMiddleware>();
+            app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -36,18 +45,8 @@ namespace ProjectBase
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProfitCosts");
-            });
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", configuration["App:Name"]);
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
             });
         }
 
@@ -62,7 +61,25 @@ namespace ProjectBase
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProfitCosts", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = configuration["App:Name"], Version = configuration["App:Version"] });
+                var securitySchema = new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                };
+                c.AddSecurityDefinition("Bearer", securitySchema);
+
+                var securityRequirement = new OpenApiSecurityRequirement();
+                securityRequirement.Add(securitySchema, new[] { "Bearer" });
+                c.AddSecurityRequirement(securityRequirement);
             });
             
             // Register in-memory cache
@@ -71,8 +88,11 @@ namespace ProjectBase
             // DI registration
             RegisterBaseDependencyInjection(services);
 
+            Cz.Bkk.Generic.CacheLibrary.Setup.RegisterDependencies(services);
+            Cz.Bkk.Generic.IdentityManagement.Setup.RegisterDependencies(services);
+
             // Identity management startup configuration
-            //Setup.Configure(services, configuration);
+            Cz.Bkk.Generic.IdentityManagement.Setup.Configure(services, configuration);
         }
 
         /// <summary>
@@ -81,7 +101,8 @@ namespace ProjectBase
         /// <param name="services"></param>
         private static void RegisterBaseDependencyInjection(IServiceCollection services)
         {
-            services.AddScoped<Settings>();
+            services.AddSingleton<Settings>();
+            services.AddSingleton<ICurrentDateTime, CurrentDateTime>();
         }
     }
 }

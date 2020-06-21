@@ -1,30 +1,35 @@
 ﻿using Cz.Bkk.Generic.Common.Models.Exceptions;
-using Cz.Bkk.Generic.Common.Models.Input;
 using Cz.Bkk.Generic.IdentityManagement.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cz.Bkk.Generic.IdentityManagement.LogicLayer
 {
-    internal class Registration : IRegistration
+    internal class Role : IRole
     {
-        private readonly IRegistrationService service;
+        private readonly IRoleService service;
 
-        public Registration(IRegistrationService service)
+        public Role(IRoleService service)
         {
             this.service = service;
         }
 
-        public async Task<string> CreateAsync(UserInput input)
+        public async Task<bool> CreateAsync(string roleName)
         {
-            if (input == null)
+            if (string.IsNullOrEmpty(roleName))
             {
-                throw new ArgumentNullException($"{nameof(input)} is null.");
+                throw new ArgumentNullException($"{nameof(roleName)} is null or empty.");
             }
-            var response = await service.CreateAsync(input);
+
+            var role = await service.Search(roleName);
+
+            if (role != null)
+            {
+                return false;
+            }
+
+            var response = await service.Create(roleName);
 
             if (response?.Errors?.Count() > 0)
             {
@@ -32,7 +37,7 @@ namespace Cz.Bkk.Generic.IdentityManagement.LogicLayer
                 throw new NotCreatedException(errors);
             }
 
-            return null;
+            return true;
         }
     }
 }
