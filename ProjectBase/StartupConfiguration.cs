@@ -15,7 +15,7 @@ namespace Cz.Bkk.Generic.ProjectBase
     public static class StartupConfiguration
     {
         /// <summary>
-        /// Application configuration
+        /// Application configuration 
         /// </summary>
         /// <param name="app"></param>
         public static void ConfigureApp(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env, IConfiguration configuration)
