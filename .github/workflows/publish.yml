@@ -16,7 +16,7 @@ jobs:
       with:
         token: ${{secrets.github_token}}        
     - name: Print new build number
-      run: echo "Build number is $BUILD_NUMBER"
+      run: echo "New build number is $BUILD_NUMBER"
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
