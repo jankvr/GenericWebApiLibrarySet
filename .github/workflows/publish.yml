@@ -19,7 +19,27 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Publish FluentEmail.Core
+    - name: Publish Common
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: Common/Common.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Publish LogLibrary
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: LogLibrary/LogLibrary.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Publish CacheLibrary
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: CacheLibrary/CacheLibrary.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Publish IdentityManagement
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: IdentityManagement/IdentityManagement.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Publish ProjectBase
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: ProjectBase/ProjectBase.csproj
