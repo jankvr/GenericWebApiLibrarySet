@@ -82,7 +82,7 @@ namespace Cz.Bkk.Generic.ProjectBase
             // Register in-memory cache
             services.AddMemoryCache();
 
-            // DI registration
+            // Dependency Injection registration
             RegisterBaseDependencyInjection(services);
 
             Cz.Bkk.Generic.CacheLibrary.Setup.RegisterDependencies(services);
