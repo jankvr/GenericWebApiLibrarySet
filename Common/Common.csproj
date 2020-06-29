@@ -5,8 +5,8 @@
     <RootNamespace>Cz.Bkk.Generic.Common</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Cz.Bkk.Generic.Common</PackageId>
-    <VersionPrefix Condition="'$(VersionSuffix)' != ''">1.0.0.$(VersionSuffix)</VersionPrefix>
-    <VersionPrefix Condition="'$(VersionSuffix)' == ''">1.0.0.0</VersionPrefix>
+    <VersionPrefix Condition="'$(VersionSuffix)' != ''">1.1.0.$(VersionSuffix)</VersionPrefix>
+    <VersionPrefix Condition="'$(VersionSuffix)' == ''">1.1.0.0</VersionPrefix>
     <Version>$(VersionPrefix)</Version>
     <Authors>Bkk</Authors>
     <Description>Common library used in Cz.Bkk universe.</Description>
