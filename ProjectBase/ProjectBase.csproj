@@ -6,8 +6,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Cz.Bkk.Generic.ProjectBase</PackageId>
     <!--<Version>1.0.$([System.DateTime]::UtcNow.ToString(MMdd)).$([System.DateTime]::UtcNow.ToString(hhmm))</Version>-->
-    <Version Condition="$(VersionSuffix) != ''">1.0.0.$(VersionSuffix)</Version>
-    <Version Condition="$(VersionSuffix) == ''">1.0.0.0</Version>
+    <Version Condition="'$(VersionSuffix)' != ''">1.0.0.$(VersionSuffix)</Version>
+    <Version Condition="'$(VersionSuffix)' == ''">1.0.0.0</Version>
     <Authors>Bkk</Authors>
     <Description>Serves as an REST API project base.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -5,8 +5,8 @@
     <RootNamespace>Cz.Bkk.Generic.IdentityManagement</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Cz.Bkk.Generic.IdentityManagement</PackageId>
-    <Version Condition="$(VersionSuffix) != ''">1.0.0.$(VersionSuffix)</Version>
-    <Version Condition="$(VersionSuffix) == ''">1.0.0.0</Version>
+    <Version Condition="'$(VersionSuffix)' != ''">1.0.0.$(VersionSuffix)</Version>
+    <Version Condition="'$(VersionSuffix)' == ''">1.0.0.0</Version>
     <Authors>Bkk</Authors>
     <Description>Identity management</Description>
   </PropertyGroup>
