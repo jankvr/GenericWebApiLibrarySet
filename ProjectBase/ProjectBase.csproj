@@ -5,9 +5,9 @@
     <RootNamespace>Cz.Bkk.Generic.ProjectBase</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Cz.Bkk.Generic.ProjectBase</PackageId>
-    <Version>0.3.0</Version>
+    <Version>1.0.$([System.DateTime]::UtcNow.ToString(MMdd)).$([System.DateTime]::UtcNow.ToString(hhmm))</Version>
     <Authors>Bkk</Authors>
-    <Description>Serves as an REST API project base essentials.</Description>
+    <Description>Serves as an REST API project base.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 

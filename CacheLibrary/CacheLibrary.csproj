@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Cz.Bkk.Generic.CacheLibrary</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Cz.Bkk.Generic.CacheLibrary</PackageId>
+    <Version>1.0.$([System.DateTime]::UtcNow.ToString(MMdd)).$([System.DateTime]::UtcNow.ToString(hhmm))</Version>
+    <Authors>Bkk</Authors>
+    <Description>Cache library.</Description>
   </PropertyGroup>
 
   <ItemGroup>
