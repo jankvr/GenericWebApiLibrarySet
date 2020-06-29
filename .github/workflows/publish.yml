@@ -27,29 +27,29 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: Common/Common.csproj
-          VERSION_STATIC: 1.1.0.${{BUILD_NUMBER}}
+          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish LogLibrary
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: LogLibrary/LogLibrary.csproj
-          VERSION_STATIC: 1.1.0.${{BUILD_NUMBER}}
+          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish CacheLibrary
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: CacheLibrary/CacheLibrary.csproj
-          VERSION_STATIC: 1.1.0.${{BUILD_NUMBER}}
+          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish IdentityManagement
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: IdentityManagement/IdentityManagement.csproj
-          VERSION_STATIC: 1.1.0.${{BUILD_NUMBER}}
+          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish ProjectBase
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: ProjectBase/ProjectBase.csproj
-          VERSION_STATIC: 1.1.0.${{BUILD_NUMBER}}
+          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
