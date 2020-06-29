@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore -version--sufix $BUILD_NUMBER
+      run: dotnet build --configuration Release --no-restore --version-suffix $BUILD_NUMBER
     - name: Publish Common
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
