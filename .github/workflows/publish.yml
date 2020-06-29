@@ -27,7 +27,7 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: Common/Common.csproj
-          VERSION_STATIC: 1.1.0.$BUILD_NUMBER
+          VERSION_STATIC: 1.1.0."$BUILD_NUMBER"
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish LogLibrary
       uses: brandedoutcast/publish-nuget@v2.5.2
