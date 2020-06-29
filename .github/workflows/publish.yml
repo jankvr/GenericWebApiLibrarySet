@@ -5,16 +5,21 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  generate-build-number:
     runs-on: ubuntu-latest
-
+    outputs:
+      build_number: ${{ steps.buildnumber.outputs.build_number }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Generate build number
+    - name: Generating
+      id: buildnumber
       uses: einaregilsson/build-number@v2 
       with:
-        token: ${{secrets.github_token}}        
+        token: ${{secrets.github_token}}
+  publish:
+    needs: [generate-build-number]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -27,29 +32,29 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: Common/Common.csproj
-          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
+          VERSION_STATIC: 1.1.0.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish LogLibrary
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: LogLibrary/LogLibrary.csproj
-          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
+          VERSION_STATIC: 1.1.0.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish CacheLibrary
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: CacheLibrary/CacheLibrary.csproj
-          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
+          VERSION_STATIC: 1.1.0.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish IdentityManagement
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: IdentityManagement/IdentityManagement.csproj
-          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
+          VERSION_STATIC: 1.1.0.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish ProjectBase
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: ProjectBase/ProjectBase.csproj
-          VERSION_STATIC: 1.1.0.${{secrets.github_token}}
+          VERSION_STATIC: 1.1.0.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
