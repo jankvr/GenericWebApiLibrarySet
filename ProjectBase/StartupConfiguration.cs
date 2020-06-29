@@ -1,16 +1,13 @@
 ﻿using Cz.Bkk.Generic.Common.IdentityInterfaces;
 using Cz.Bkk.Generic.Common.Services;
 using Cz.Bkk.Generic.ProjectBase.AppConfiguration;
-using Cz.Bkk.Generic.ProjectBase.MessageHandling;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Configuration;
 
-namespace ProjectBase
+namespace Cz.Bkk.Generic.ProjectBase
 {
     /// <summary>
     /// 

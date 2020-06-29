@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Cz.Bkk.Generic.ProjectBase</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Cz.Bkk.Generic.ProjectBase</PackageId>
+    <Version>0.3.0</Version>
+    <Authors>Bkk</Authors>
+    <Description>Serves as an REST API project base essentials.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CacheLibrary\CacheLibrary.csproj" />
     <ProjectReference Include="..\IdentityManagement\IdentityManagement.csproj" />
+    <ProjectReference Include="..\LogLibrary\LogLibrary.csproj" />
   </ItemGroup>
 
 </Project>
