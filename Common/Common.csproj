@@ -5,7 +5,7 @@
     <RootNamespace>Cz.Bkk.Generic.Common</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Cz.Bkk.Generic.Common</PackageId>
-    <Version>1.0.$([System.DateTime]::UtcNow.ToString(MMdd)).$([System.DateTime]::UtcNow.ToString(hhmm))</Version>
+    <Version>1.0.0.$(VersionSuffix)</Version>
     <Authors>Bkk</Authors>
     <Description>Common library used in Cz.Bkk universe.</Description>
   </PropertyGroup>
