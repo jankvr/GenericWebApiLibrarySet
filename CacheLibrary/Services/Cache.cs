@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Cz.Bkk.Generic.CacheLibrary.Services
 {
+    /// <summary>
+    /// ICache implementation
+    /// </summary>
     internal class Cache : ICache
     {
         private readonly ICacheService cacheService;
