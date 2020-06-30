@@ -29,31 +29,31 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore --version-suffix ${{needs.generate-build-number.outputs.build_number}}
     - name: Publish Common
-      uses: jankvr/publish-nuget@v0.9.0
+      uses: jankvr/publish-nuget@v0.9.1
       with:
           PROJECT_FILE_PATH: Common/Common.csproj
           VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish LogLibrary
-      uses: jankvr/publish-nuget@v0.9.0
+      uses: jankvr/publish-nuget@v0.9.1
       with:
           PROJECT_FILE_PATH: LogLibrary/LogLibrary.csproj
           VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish CacheLibrary
-      uses: jankvr/publish-nuget@v0.9.0
+      uses: jankvr/publish-nuget@v0.9.1
       with:
           PROJECT_FILE_PATH: CacheLibrary/CacheLibrary.csproj
           VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}} 
     - name: Publish IdentityManagement
-      uses: jankvr/publish-nuget@v0.9.0
+      uses: jankvr/publish-nuget@v0.9.1
       with:
           PROJECT_FILE_PATH: IdentityManagement/IdentityManagement.csproj
           VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish ProjectBase
-      uses: jankvr/publish-nuget@v0.9.0
+      uses: jankvr/publish-nuget@v0.9.1
       with:
           PROJECT_FILE_PATH: ProjectBase/ProjectBase.csproj
           VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
