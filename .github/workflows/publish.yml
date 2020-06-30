@@ -45,7 +45,7 @@ jobs:
       with:
           PROJECT_FILE_PATH: CacheLibrary/CacheLibrary.csproj
           VERSION_STATIC: 1.1.0.${{needs.generate-build-number.outputs.build_number}}
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}} 
     - name: Publish IdentityManagement
       uses: jankvr/publish-nuget@v2.5.2
       with:
