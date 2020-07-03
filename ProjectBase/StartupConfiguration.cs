@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Configuration;
 
 namespace Cz.Bkk.Generic.ProjectBase
 {
@@ -54,16 +56,13 @@ namespace Cz.Bkk.Generic.ProjectBase
         /// Services configuration
         /// </summary>
         /// <param name="services"></param>
-        public static void ConfigureServices(IServiceCollection services, Microsoft.Extensions.Configuration.IConfiguration configuration)
+        public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddCors(options =>
             {
-                options.AddPolicy(name: policy, builder =>
+                options.AddPolicy(policy, builder =>
                 {
-                    builder
-                    .SetIsOriginAllowedToAllowWildcardSubdomains()
-                    .WithOrigins("http://example.com",
-                                        "http://www.contoso.com");
+                    builder.SetIsOriginAllowedToAllowWildcardSubdomains().WithOrigins(CorsUrls(configuration));
                 });
             });
 
@@ -104,6 +103,12 @@ namespace Cz.Bkk.Generic.ProjectBase
 
             // Identity management startup configuration
             Cz.Bkk.Generic.IdentityManagement.Setup.Configure(services, configuration);
+        }
+
+        private static string[] CorsUrls(IConfiguration configuration)
+        {
+            var parsedUrls = configuration["AppConfiguration:CorsUrls"].ToString().Split(';');
+            return parsedUrls;
         }
 
         /// <summary>
