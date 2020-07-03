@@ -5,18 +5,21 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  generate-build-number:
     runs-on: ubuntu-latest
-
+    outputs:
+      build_number: ${{ steps.buildnumber.outputs.build_number }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Generate build number
+    - name: Generating
+      id: buildnumber
       uses: einaregilsson/build-number@v2 
       with:
-        token: ${{secrets.github_token}}        
-    - name: Print new build number
-      run: echo "New build number is $BUILD_NUMBER"
+        token: ${{secrets.github_token}}
+  publish:
+    needs: [generate-build-number]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -24,29 +27,34 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore --version-suffix $BUILD_NUMBER
+      run: dotnet build --configuration Release --no-restore --version-suffix ${{needs.generate-build-number.outputs.build_number}}
     - name: Publish Common
-      uses: brandedoutcast/publish-nuget@v2.5.2
+      uses: jankvr/publish-nuget@v0.9.2
       with:
           PROJECT_FILE_PATH: Common/Common.csproj
+          VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish LogLibrary
-      uses: brandedoutcast/publish-nuget@v2.5.2
+      uses: jankvr/publish-nuget@v0.9.2
       with:
           PROJECT_FILE_PATH: LogLibrary/LogLibrary.csproj
+          VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish CacheLibrary
-      uses: brandedoutcast/publish-nuget@v2.5.2
+      uses: jankvr/publish-nuget@v0.9.2
       with:
           PROJECT_FILE_PATH: CacheLibrary/CacheLibrary.csproj
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}} 
     - name: Publish IdentityManagement
-      uses: brandedoutcast/publish-nuget@v2.5.2
+      uses: jankvr/publish-nuget@v0.9.2
       with:
           PROJECT_FILE_PATH: IdentityManagement/IdentityManagement.csproj
+          VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
     - name: Publish ProjectBase
-      uses: brandedoutcast/publish-nuget@v2.5.2
+      uses: jankvr/publish-nuget@v0.9.2
       with:
           PROJECT_FILE_PATH: ProjectBase/ProjectBase.csproj
+          VERSION_STATIC: 1.1.${{needs.generate-build-number.outputs.build_number}}
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
