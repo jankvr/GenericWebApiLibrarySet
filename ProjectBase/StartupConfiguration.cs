@@ -62,7 +62,7 @@ namespace Cz.Bkk.Generic.ProjectBase
             {
                 options.AddPolicy(policy, builder =>
                 {
-                    builder.SetIsOriginAllowedToAllowWildcardSubdomains().WithOrigins(CorsUrls(configuration));
+                    builder.SetIsOriginAllowedToAllowWildcardSubdomains().WithOrigins(CorsUrls(configuration)).WithHeaders("*");
                 });
             });
 
