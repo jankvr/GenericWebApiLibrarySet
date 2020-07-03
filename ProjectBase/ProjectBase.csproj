@@ -6,9 +6,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Cz.Bkk.Generic.ProjectBase</PackageId>
     <!--<Version>1.0.$([System.DateTime]::UtcNow.ToString(MMdd)).$([System.DateTime]::UtcNow.ToString(hhmm))</Version>-->
-    <VersionPrefix Condition="'$(VersionSuffix)' != ''">1.1.0.$(VersionSuffix)</VersionPrefix>
-    <VersionPrefix Condition="'$(VersionSuffix)' == ''">1.1.0.0</VersionPrefix>
-    <Version>$(VersionPrefix)</Version>
+    <VersionPrefix Condition="'$(VersionSuffix)' != ''">1.1.$(VersionSuffix)</VersionPrefix>
+    <VersionPrefix Condition="'$(VersionSuffix)' == ''">1.1.0</VersionPrefix>
+    <Version Condition="'$(VersionSuffix)' == ''">1.1.0</Version>
+    <Version Condition="'$(VersionSuffix)' == ''">1.1.0</Version>
     <Authors>Bkk</Authors>
     <Description>Serves as an REST API project base.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

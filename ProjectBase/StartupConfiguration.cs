@@ -14,6 +14,8 @@ namespace Cz.Bkk.Generic.ProjectBase
     /// </summary>
     public static class StartupConfiguration
     {
+        private static readonly string policy = "policy";
+
         /// <summary>
         /// Application configuration 
         /// </summary>
@@ -27,6 +29,7 @@ namespace Cz.Bkk.Generic.ProjectBase
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors(policy);
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -53,6 +56,17 @@ namespace Cz.Bkk.Generic.ProjectBase
         /// <param name="services"></param>
         public static void ConfigureServices(IServiceCollection services, Microsoft.Extensions.Configuration.IConfiguration configuration)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: policy, builder =>
+                {
+                    builder
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .WithOrigins("http://example.com",
+                                        "http://www.contoso.com");
+                });
+            });
+
             services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
